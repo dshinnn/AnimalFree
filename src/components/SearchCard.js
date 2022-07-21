@@ -11,12 +11,20 @@ export default function SearchCard(props) {
     return (
     <>
         <div className="row">
-            <div className="offset-3 col-sm-6">
+            <div className="col-sm-6 w-100">
                 <div className="card mb-2">
                     <div className="card-body">
                         <h5 className="card-title">{results.description}</h5>
-                        <p className="card-text">{String(results.additionalDescriptions) !== "undefined" ? String(results.additionalDescriptions).replaceAll(";", ". ") : "No description provided"}</p>
-                        <Link to={`/check/${results.fdcId}`} className="btn btn-success w-100" onClick={() => handleClick(results)}>Check</Link>
+                        
+                        {/* Displays brand name if it is provided */}
+                        {results.brandName ? <p className='text-muted fst-italic'>Brand: {results.brandName}</p> : null}
+                        
+                        {/* Display item description if provided otherwise prints "No description provided" */}
+                        <p className="card-text">{String(results.additionalDescriptions) !== "undefined" && String(results.additionalDescriptions) !== "" ? 
+                        String(results.additionalDescriptions).replaceAll(";", ", ") : "No description provided"}</p>
+
+                        {/* Check button */}
+                        <Link to={`/check/${results.fdcId}`} className="btn btn-success w- d-block mx-auto" onClick={() => handleClick(results)}>Check</Link>
                     </div>
                 </div>
             </div>
